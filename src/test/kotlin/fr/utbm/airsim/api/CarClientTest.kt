@@ -1,5 +1,6 @@
 package fr.utbm.airsim.api
 
+import org.msgpack.MessagePack
 import org.msgpack.rpc.Client
 import org.msgpack.rpc.loop.EventLoop
 
@@ -16,13 +17,27 @@ class CarClientTest {
             val rpcClient = Client("127.0.0.1", 41451, loop)
             val carClient = rpcClient.proxy(CarClientInterface::class.java)
 
-            println(carClient.getConnectionState())
+            carClient.enableApiControl(true)
 
-//            carClient.confirmConnection()
-//            carClient.enableApiControl(true)
+            println("API control enabled: ${carClient.isApiControlEnabled()}")
+
+            val vehicleState = carClient.getCarState()
+
+//            carClient.simPause(true)
 //
-//            val controls = CarControls()
-//            controls.throttle = 1f
+//            println("Simulation paused: ${carClient.simIsPaused()}")
+
+//            println("Press enter to drive forward...")
+//            System.`in`.read()
+
+            val controls = CarControls()
+            controls.throttle = 1f
+            carClient.setCarControls(controls, "")
+
+//            println("Press enter to activate handbrake...")
+//            System.`in`.read()
+//
+//            controls.handbrake = true
 //            carClient.setCarControls(controls)
         }
     }

@@ -31,7 +31,8 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib'
 
     // Overriding the msgpack-rpc version of msgpack
-    compile group: 'org.msgpack', name: 'msgpack', version: '0.6.12'
+//    compile group: 'org.msgpack', name: 'msgpack', version: '0.6.12'
+    compile group: 'org.msgpack', name: 'msgpack-core', version: '0.8.16'
     compile group: 'com.github.stampery', name: 'msgpack-rpc', version: '0.7.1'
 }
 
