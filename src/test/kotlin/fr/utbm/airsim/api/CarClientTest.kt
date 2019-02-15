@@ -25,22 +25,9 @@ class CarClientTest {
             val vehicleState = carClient.getCarState()
             println(vehicleState)
 
-//            carClient.simPause(true)
-//
-//            println("Simulation paused: ${carClient.simIsPaused()}")
-
-//            println("Press enter to drive forward...")
-//            System.`in`.read()
-
             val controls = CarControls()
             controls.throttle = 1f
             carClient.setCarControls(controls, "")
-
-//            println("Press enter to activate handbrake...")
-//            System.`in`.read()
-//
-//            controls.handbrake = true
-//            carClient.setCarControls(controls)
         }
     }
 

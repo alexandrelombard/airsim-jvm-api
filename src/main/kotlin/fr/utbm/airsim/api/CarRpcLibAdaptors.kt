@@ -1,5 +1,6 @@
 package fr.utbm.airsim.api
 
+import fr.utbm.airsim.api.annotations.SerialName
 import org.msgpack.annotation.Message
 
 @Message
@@ -17,7 +18,9 @@ data class CarState(
         var speed: Float = 0f,
         var gear: Int = 0,
         var rpm: Float = 0f,
+        @SerialName("maxrpm")
         var maxRpm: Float = 0f,
         var handbrake: Boolean = false,
+        @SerialName("kinematics_estimated")
         var kinematicsState: KinematicsState = KinematicsState(),
         var timestamp: Long = 0) : AirSimRpcMessageTrait

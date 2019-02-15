@@ -5,23 +5,58 @@ import org.msgpack.MessagePackable
 import org.msgpack.packer.Packer
 import org.msgpack.type.ValueType
 import org.msgpack.unpacker.Unpacker
+import java.lang.IllegalStateException
+import java.lang.reflect.Field
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.findAnnotation
 
 interface AirSimRpcMessageTrait : MessagePackable {
     override fun readFrom(u: Unpacker) {
         if(u.nextType == ValueType.MAP) {
             u.readMapBegin()
-            for(field in this.javaClass.declaredFields) {
-                val key = u.readString()
-                val value = u.read(field.type)
-                val property = this::class.declaredMemberProperties
-                        .first { it.name == field.name }
 
+//            for(field in this.javaClass.declaredFields) {
+//                val key = u.readString()
+//                val value = u.read(field.type)
+//                val property = this::class.declaredMemberProperties
+//                        .first { it.name == field.name }
+//
+//                if(property is KMutableProperty<*>) {
+//                    property.setter.call(this, value)
+//                }
+//            }
+
+            // Build the map associating a name to a field
+            val fields = hashMapOf<String, Field>()
+            for(property in this::class.declaredMemberProperties) {
+                val serialName = property.findAnnotation<SerialName>()
+                val field = this.javaClass.declaredFields.first { it.name == property.name }
+                if(serialName != null) {
+                    fields[serialName.value] = field
+                } else {
+                    fields[property.name] = field
+                }
+            }
+
+            // We read as long as there are map keys (whose value type are RAW)
+
+            while(!u.trySkipNil() && u.nextType == ValueType.RAW) {
+                val key = u.readString()
+
+                // Looking for the corresponding field, using either the name or the serial name
+                val field = fields[key] ?: throw IllegalStateException("Field ${key} could not be deserialized: not found in class ${this.javaClass.name}")
+
+                // Reading the value using the found field type
+                val value = u.read(field.type)
+
+                // Setting the associated property
+                val property = this::class.declaredMemberProperties.first { it.name == field.name }
                 if(property is KMutableProperty<*>) {
                     property.setter.call(this, value)
                 }
             }
+
             u.readMapEnd()
         }
     }
