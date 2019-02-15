@@ -16,6 +16,9 @@ interface MultirotorClientInterface : RpcLibClientBase {
     fun moveByVelocityAsync(vx: Float, vy: Float, vz: Float, duration: Float,
                             drivetrainType: DrivetrainType = DrivetrainType.MAX_DEGREE_OF_FREEDOM,
                             yawMode: YawMode = YawMode(), vehicleName: String = ""): Future<Void>
+    fun moveToPositionAsync(x: Float, y: Float, z: Float, velocity: Float, timeoutSec: Float = Float.MAX_VALUE,
+                            drivetrainType: DrivetrainType = DrivetrainType.MAX_DEGREE_OF_FREEDOM, yawMode: YawMode = YawMode(),
+                            lookahead: Float = -1f, adaptiveLookahead: Float = -1f, vehicleName: String = "")
     fun  hoverAsync(vehicleName: String): Future<Void>
 
     fun moveByRc(rcData: RcData, vehicleName: String = "")
