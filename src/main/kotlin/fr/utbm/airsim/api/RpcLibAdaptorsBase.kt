@@ -90,6 +90,7 @@ data class CollisionInfo(
         var position: Vector3r = Vector3r(),
         @SerialName("penetration_depth")
         var penetrationDepth: Float = 0f,
+        @SerialName("time_stamp")
         var timestamp: Long = 0,
         @SerialName("collision_count")
         var collisionCount: Int = 0,
@@ -106,10 +107,15 @@ data class RcData(
         var roll: Float = 0f,
         var throttle: Float = 0f,
         var yaw: Float = 0f,
+        @SerialName("left_z")
         var leftZ: Float = 0f,
+        @SerialName("right_z")
         var rightZ: Float = 0f,
         var switches: Short = 0,
+        @SerialName("vendor_id")
         var vendorId: String = "",
+        @SerialName("is_initialized")
         var isInitialized: Boolean = false,
+        @SerialName("is_valid")
         var isValid: Boolean = false
 ) : AirSimRpcMessageTrait

@@ -14,9 +14,9 @@ data class YawMode(
 
 @Message
 data class MultirotorState(
-        @SerialName("collision_info")
+        @SerialName("collision")
         val collisionInfo: CollisionInfo = CollisionInfo(),
-        @SerialName("kinematics_state_estimated")
+        @SerialName("kinematics_estimated")
         val kinematicsStateEstimated: KinematicsState = KinematicsState(),
         @SerialName("kinematics_state_true")
         val kinematicsStateTrue: KinematicsState = KinematicsState(),
