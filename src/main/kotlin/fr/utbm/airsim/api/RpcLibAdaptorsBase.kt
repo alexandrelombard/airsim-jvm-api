@@ -1,12 +1,6 @@
 package fr.utbm.airsim.api
 
-import com.sun.org.apache.xpath.internal.operations.Bool
-import org.msgpack.MessagePackable
 import org.msgpack.annotation.Message
-import org.msgpack.annotation.MessagePackBeans
-import org.msgpack.annotation.MessagePackMessage
-import org.msgpack.packer.Packer
-import org.msgpack.unpacker.Unpacker
 
 @Message
 data class KinematicsState(
@@ -16,31 +10,14 @@ data class KinematicsState(
         var angularVelocity: Vector3r = Vector3r(),
         var linearAcceleration: Vector3r = Vector3r(),
         var angularAcceleration: Vector3r = Vector3r()
-) : MessagePackable {
-    override fun readFrom(u: Unpacker?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+) : AirSimRpcMessageTrait
 
-    override fun writeTo(pk: Packer?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-}
-
-@MessagePackMessage
+@Message
 data class Vector3r(
         var x: Float = 0f,
         var y: Float = 0f,
         var z: Float = 0f
-) : MessagePackable {
-    override fun readFrom(u: Unpacker) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun writeTo(pk: Packer) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-}
+) : AirSimRpcMessageTrait
 
 @Message
 data class Quaternionr(
@@ -48,7 +25,7 @@ data class Quaternionr(
         var x: Float = 0f,
         var y: Float = 0f,
         var z: Float = 0f
-)
+) : AirSimRpcMessageTrait
 
 @Message
 data class EnvironmentState(
@@ -58,14 +35,14 @@ data class EnvironmentState(
         var airPressure: Float = 0f,
         var temperature: Float = 0f,
         var airDensity: Float = 0f
-)
+) : AirSimRpcMessageTrait
 
 @Message
 data class GeoPoint(
         var latitude: Float = 0f,
         var longitude: Float = 0f,
         var altitude: Float = 0f
-)
+) : AirSimRpcMessageTrait
 
 @Message
 data class ProjectionMatrix(
@@ -74,7 +51,7 @@ data class ProjectionMatrix(
                 floatArrayOf(0f, 0f, 0f, 0f),
                 floatArrayOf(0f, 0f, 0f, 0f),
                 floatArrayOf(0f, 0f, 0f, 0f))
-) {
+) : AirSimRpcMessageTrait {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -102,7 +79,7 @@ data class CollisionInfo(
         var collisionCount: Int = 0,
         var objectName: String = "",
         var objectId: Int = -1
-)
+) : AirSimRpcMessageTrait
 
 @Message
 data class RcData(
@@ -117,4 +94,4 @@ data class RcData(
         var vendorId: String = "",
         var isInitialized: Boolean = false,
         var isValid: Boolean = false
-)
+) : AirSimRpcMessageTrait
