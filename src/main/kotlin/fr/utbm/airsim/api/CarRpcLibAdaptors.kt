@@ -3,6 +3,10 @@ package fr.utbm.airsim.api
 import fr.utbm.airsim.api.annotations.SerialName
 import org.msgpack.annotation.Message
 
+/**
+ * Message for car control
+ * @author Alexandre Lombard
+ */
 @Message
 data class CarControls(
         var throttle: Float = 0f,
@@ -13,6 +17,10 @@ data class CarControls(
         var manualGear: Int = 0,
         var gearImmediate: Boolean = true) : AirSimRpcMessageTrait
 
+/**
+ * Message for car state
+ * @author Alexandre Lombard
+ */
 @Message
 data class CarState(
         var speed: Float = 0f,

@@ -11,21 +11,14 @@ import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.findAnnotation
 
+/**
+ * This interface is a trait for reading and writing packet from and to AirSim.
+ * @author Alexandre Lombard
+ */
 interface AirSimRpcMessageTrait : MessagePackable {
     override fun readFrom(u: Unpacker) {
         if(u.nextType == ValueType.MAP) {
             u.readMapBegin()
-
-//            for(field in this.javaClass.declaredFields) {
-//                val key = u.readString()
-//                val value = u.read(field.type)
-//                val property = this::class.declaredMemberProperties
-//                        .first { it.name == field.name }
-//
-//                if(property is KMutableProperty<*>) {
-//                    property.setter.call(this, value)
-//                }
-//            }
 
             // Build the map associating a name to a field
             val fields = hashMapOf<String, Field>()

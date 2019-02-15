@@ -2,6 +2,10 @@ package fr.utbm.airsim.api
 
 import org.msgpack.annotation.Message
 
+/**
+ * Base interface of the AirSim clients (for both car and drone)
+ * @author Alexandre Lombard
+ */
 interface RpcLibClientBase {
     fun confirmConnection()
     fun reset()
