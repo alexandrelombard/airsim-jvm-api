@@ -31,17 +31,30 @@ class MultirotorClientTest {
                 println("QuadCopter should now be flying")
             }
 
-            println("QuadCopter will done start doing circles...")
+            multirotorClient.simPause(true)
+            sleep(1000)
+            multirotorClient.simContinueForTime(1.0)
+            sleep(2000)
+            multirotorClient.simContinueForTime(1.0)
 
-            var e = 0.0
-            val dt = 0.1
-            val amplitude = 10
+            multirotorClient.simPause(true)
+            System.`in`.read()
+            multirotorClient.moveByAngleZAzync(0f, 0f, 1f, 0f, 1f)
+            System.`in`.read()
+            multirotorClient.simContinueForTime(1.0)
 
-            while(true) {
-                multirotorClient.moveByVelocityAsync(amplitude * cos(e).toFloat(), amplitude * sin(e).toFloat(), 0f, dt.toFloat())
-                e += 0.05
-                sleep((dt * 1000).toLong())
-            }
+
+//            println("QuadCopter will now start doing circles...")
+//
+//            var e = 0.0
+//            val dt = 0.1
+//            val amplitude = 10
+//
+//            while(true) {
+//                multirotorClient.moveByVelocityAsync(amplitude * cos(e).toFloat(), amplitude * sin(e).toFloat(), 0f, dt.toFloat())
+//                e += 0.05
+//                sleep((dt * 1000).toLong())
+//            }
         }
     }
 }
