@@ -31,17 +31,25 @@ class MultirotorClientTest {
                 println("QuadCopter should now be flying")
             }
 
-            multirotorClient.simPause(true)
-            sleep(1000)
-            multirotorClient.simContinueForTime(1.0)
-            sleep(2000)
-            multirotorClient.simContinueForTime(1.0)
+//            multirotorClient.simPause(true)
+//            sleep(1000)
+//            multirotorClient.simContinueForTime(1.0)
+//            sleep(2000)
+//            multirotorClient.simContinueForTime(1.0)
 
-            multirotorClient.simPause(true)
+//            multirotorClient.simPause(true)
+            println("1")
             System.`in`.read()
-            multirotorClient.moveByAngleZAzync(0f, 0f, 1f, 0f, 1f)
+            multirotorClient.simPause(true)
+            println("2")
+            System.`in`.read()
+            multirotorClient.moveByVelocityAsync(0f, 0f, -5f, 1f)
+            println("3")
             System.`in`.read()
             multirotorClient.simContinueForTime(1.0)
+            println("4")
+            System.`in`.read()
+            rpcClient.close()
 
 
 //            println("QuadCopter will now start doing circles...")
