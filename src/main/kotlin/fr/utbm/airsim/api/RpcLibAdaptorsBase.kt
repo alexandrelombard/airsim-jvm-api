@@ -1,7 +1,10 @@
 package fr.utbm.airsim.api
 
 import fr.utbm.airsim.api.annotations.SerialName
+import fr.utbm.airsim.api.common.ImageType
 import org.msgpack.annotation.Message
+import java.awt.ComponentOrientation
+import java.util.*
 
 @Message
 data class KinematicsState(
@@ -48,6 +51,11 @@ data class EnvironmentState(
         var temperature: Float = 0f,
         var airDensity: Float = 0f
 ) : AirSimRpcMessageTrait
+
+@Message
+data class Pose(
+        val position: Vector3r = Vector3r(),
+        val orientation: Quaternionr = Quaternionr())
 
 @Message
 data class GeoPoint(
@@ -99,6 +107,41 @@ data class CollisionInfo(
         @SerialName("object_id")
         var objectId: Int = -1
 ) : AirSimRpcMessageTrait
+
+@Message
+data class CameraInfo(
+        val pose: Pose = Pose(),
+        val fov: Float = 0f,
+        val projMat: ProjectionMatrix = ProjectionMatrix())
+
+data class ImageRequest(
+        val cameraName: String = "",
+        val imageType: ImageType,
+        val pixelsAsFloat: Boolean = false,
+        val compress: Boolean = false
+)
+
+@Message
+data class ImageResponse(
+        val imageDataUint8: ByteArray,
+        val imageDataFloat: FloatArray,
+        val cameraName: String = "",
+        val cameraPosition: Vector3r,
+        val cameraOrientation: Quaternionr,
+        val timeStamp: ULong,
+        val message: String,
+        val pixelsAsFloat: Boolean = false,
+        val compress: Boolean = false,
+        val width: Int = 0,
+        val height: Int = 0,
+        val imageType: ImageType
+)
+
+@Message
+data class LidarData(
+        val timeStamp: ULong,
+        val pointCloud: FloatArray,
+        val pose: Pose)
 
 @Message
 data class RcData(
