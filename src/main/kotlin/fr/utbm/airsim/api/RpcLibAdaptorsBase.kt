@@ -52,8 +52,9 @@ data class EnvironmentState(
 
 @Message
 data class Pose(
-        val position: Vector3r = Vector3r(),
-        val orientation: Quaternionr = Quaternionr())
+        var position: Vector3r = Vector3r(),
+        var orientation: Quaternionr = Quaternionr()
+) : AirSimRpcMessageTrait
 
 @Message
 data class GeoPoint(
@@ -108,59 +109,42 @@ data class CollisionInfo(
 
 @Message
 data class CameraInfo(
-        val pose: Pose = Pose(),
-        val fov: Float = 0f,
-        val projMat: ProjectionMatrix = ProjectionMatrix())
+        var pose: Pose = Pose(),
+        var fov: Float = 0f,
+        var projMat: ProjectionMatrix = ProjectionMatrix()
+) : AirSimRpcMessageTrait
 
 data class ImageRequest(
-        val cameraName: String = "",
-        val imageType: ImageType,
-        val pixelsAsFloat: Boolean = false,
-        val compress: Boolean = false
-)
+        var cameraName: String = "",
+        var imageType: ImageType,
+        var pixelsAsFloat: Boolean = false,
+        var compress: Boolean = false
+) : AirSimRpcMessageTrait
 
 @Message
 data class ImageResponse(
-        val imageDataUint8: Array<Byte> = arrayOf(),
-        val imageDataFloat: Array<Float> = arrayOf(),
-        val cameraName: String = "",
-        val cameraPosition: Vector3r = Vector3r(),
-        val cameraOrientation: Quaternionr = Quaternionr(),
-        val timeStamp: Long = 0L,
-        val message: String = "",
-        val pixelsAsFloat: Boolean = false,
-        val compress: Boolean = false,
-        val width: Int = 0,
-        val height: Int = 0,
-        val imageType: ImageType = ImageType.SCENE
-)
+        var imageDataUint8: Array<Byte> = arrayOf(),
+        var imageDataFloat: Array<Float> = arrayOf(),
+        var cameraName: String = "",
+        var cameraPosition: Vector3r = Vector3r(),
+        var cameraOrientation: Quaternionr = Quaternionr(),
+        var timeStamp: Long = 0L,
+        var message: String = "",
+        var pixelsAsFloat: Boolean = false,
+        var compress: Boolean = false,
+        var width: Int = 0,
+        var height: Int = 0,
+        var imageType: ImageType = ImageType.SCENE
+) : AirSimRpcMessageTrait
 
 @Message
 data class LidarData(
-        val timeStamp: Long = 0,
-        val pointCloud: Array<Float> = arrayOf(),
-        val pose: Pose = Pose()) {
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as LidarData
-
-        if (timeStamp != other.timeStamp) return false
-        if (!pointCloud.contentEquals(other.pointCloud)) return false
-        if (pose != other.pose) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = timeStamp.hashCode()
-        result = 31 * result + pointCloud.contentHashCode()
-        result = 31 * result + pose.hashCode()
-        return result
-    }
-}
+        @SerialName("time_stamp")
+        var timeStamp: Long = 0,
+        @SerialName("point_cloud")
+        var pointCloud: FloatArray = floatArrayOf(),
+        var pose: Pose = Pose()
+) : AirSimRpcMessageTrait
 
 @Message
 data class RcData(

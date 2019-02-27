@@ -22,7 +22,7 @@ class MultirotorClientLidarTest {
 
             println("API control enabled: ${multirotorClient.isApiControlEnabled()}")
 
-            val lidarData = multirotorClient.getLidarData()
+            val lidarData = multirotorClient.getLidarData("Lidar", "Alpha")
 
             println("Lidar data received at: ${lidarData.timeStamp}")
         }
