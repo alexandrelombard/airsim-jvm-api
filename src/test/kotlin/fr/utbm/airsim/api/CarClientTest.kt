@@ -8,6 +8,7 @@ import java.lang.Thread.sleep
 /**
  * Test class for the car client
  */
+@kotlin.ExperimentalUnsignedTypes
 class CarClientTest {
 
     companion object {

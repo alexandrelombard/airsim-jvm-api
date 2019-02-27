@@ -6,6 +6,7 @@ import org.msgpack.rpc.Future
  * Interface for controlling the multirotor system (the quadcopter)
  * @author Alexandre Lombard
  */
+@kotlin.ExperimentalUnsignedTypes
 interface MultirotorClientInterface : RpcLibClientBase {
     fun takeoffAsync(timeoutSec: Float = 20f, vehicleName: String = ""): Future<Void>
     fun landAsync(timeoutSec: Float = 60f, vehicleName: String = ""): Future<Void>

@@ -9,6 +9,7 @@ import java.awt.ComponentOrientation
  * Base interface of the AirSim clients (for both car and drone)
  * @author Alexandre Lombard
  */
+@kotlin.ExperimentalUnsignedTypes
 interface RpcLibClientBase {
     fun confirmConnection()
     fun reset()

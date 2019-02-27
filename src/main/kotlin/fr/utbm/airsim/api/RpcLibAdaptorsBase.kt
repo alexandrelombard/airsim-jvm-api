@@ -121,6 +121,7 @@ data class ImageRequest(
         val compress: Boolean = false
 )
 
+@kotlin.ExperimentalUnsignedTypes
 @Message
 data class ImageResponse(
         val imageDataUint8: ByteArray,
@@ -137,6 +138,7 @@ data class ImageResponse(
         val imageType: ImageType
 )
 
+@kotlin.ExperimentalUnsignedTypes
 @Message
 data class LidarData(
         val timeStamp: ULong,
