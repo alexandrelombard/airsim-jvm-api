@@ -62,7 +62,7 @@ interface RpcLibClientBase {
     // region APIs to control a character in scene
     fun simCharSetFaceExpression(expressionName: String, value: Float, characterName: String = "")
     fun simCharGetFaceExpression(expressionName: String, characterName: String = ""): Float
-    fun simCharGetAvailableFaceExpressions(): StringArray
+    fun simCharGetAvailableFaceExpressions(): Array<String>
     fun simCharSetSkinDarkness(value: Float, characterName: String = "")
     fun simCharGetSkinDarkness(characterName: String = ""): Float
     fun simCharSetSkinAgeing(value: Float, characterName: String = "")
@@ -75,7 +75,7 @@ interface RpcLibClientBase {
     fun simCharSetFacePreset(presetName: String, value: Float, characterName: String = "")
     fun simSetFacePresets(presets: Map<String, Float>, characterName: String = "")
     fun simSetBonePoses(poses: Map<String, Pose>, characterName: String = "")
-    fun simGetBonePoses(boneNames: StringArray, characterName: String = "")
+    fun simGetBonePoses(boneNames: Array<String>, characterName: String = "")
     // endregion
 }
 

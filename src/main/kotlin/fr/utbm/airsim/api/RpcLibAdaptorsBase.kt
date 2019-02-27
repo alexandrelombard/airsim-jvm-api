@@ -121,29 +121,48 @@ data class ImageRequest(
         val compress: Boolean = false
 )
 
-@kotlin.ExperimentalUnsignedTypes
 @Message
 data class ImageResponse(
-        val imageDataUint8: ByteArray,
-        val imageDataFloat: FloatArray,
+        val imageDataUint8: Array<Byte> = arrayOf(),
+        val imageDataFloat: Array<Float> = arrayOf(),
         val cameraName: String = "",
-        val cameraPosition: Vector3r,
-        val cameraOrientation: Quaternionr,
-        val timeStamp: ULong,
-        val message: String,
+        val cameraPosition: Vector3r = Vector3r(),
+        val cameraOrientation: Quaternionr = Quaternionr(),
+        val timeStamp: Long = 0L,
+        val message: String = "",
         val pixelsAsFloat: Boolean = false,
         val compress: Boolean = false,
         val width: Int = 0,
         val height: Int = 0,
-        val imageType: ImageType
+        val imageType: ImageType = ImageType.SCENE
 )
 
-@kotlin.ExperimentalUnsignedTypes
 @Message
 data class LidarData(
-        val timeStamp: ULong,
-        val pointCloud: FloatArray,
-        val pose: Pose)
+        val timeStamp: Long = 0,
+        val pointCloud: Array<Float> = arrayOf(),
+        val pose: Pose = Pose()) {
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as LidarData
+
+        if (timeStamp != other.timeStamp) return false
+        if (!pointCloud.contentEquals(other.pointCloud)) return false
+        if (pose != other.pose) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = timeStamp.hashCode()
+        result = 31 * result + pointCloud.contentHashCode()
+        result = 31 * result + pose.hashCode()
+        return result
+    }
+}
 
 @Message
 data class RcData(
