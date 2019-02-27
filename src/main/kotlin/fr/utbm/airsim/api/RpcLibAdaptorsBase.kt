@@ -111,29 +111,41 @@ data class CollisionInfo(
 data class CameraInfo(
         var pose: Pose = Pose(),
         var fov: Float = 0f,
+        @SerialName("proj_mat")
         var projMat: ProjectionMatrix = ProjectionMatrix()
 ) : AirSimRpcMessageTrait
 
 data class ImageRequest(
+        @SerialName("camera_name")
         var cameraName: String = "",
+        @SerialName("image_type")
         var imageType: ImageType,
+        @SerialName("pixels_as_float")
         var pixelsAsFloat: Boolean = false,
         var compress: Boolean = false
 ) : AirSimRpcMessageTrait
 
 @Message
 data class ImageResponse(
+        @SerialName("image_data_uint8")
         var imageDataUint8: Array<Byte> = arrayOf(),
+        @SerialName("image_data_float")
         var imageDataFloat: Array<Float> = arrayOf(),
+        @SerialName("camera_name")
         var cameraName: String = "",
+        @SerialName("camera_position")
         var cameraPosition: Vector3r = Vector3r(),
+        @SerialName("camera_orientation")
         var cameraOrientation: Quaternionr = Quaternionr(),
+        @SerialName("time_stamp")
         var timeStamp: Long = 0L,
         var message: String = "",
+        @SerialName("pixels_as_float")
         var pixelsAsFloat: Boolean = false,
         var compress: Boolean = false,
         var width: Int = 0,
         var height: Int = 0,
+        @SerialName("image_type")
         var imageType: ImageType = ImageType.SCENE
 ) : AirSimRpcMessageTrait
 
