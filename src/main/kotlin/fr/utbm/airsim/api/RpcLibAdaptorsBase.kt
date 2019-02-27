@@ -3,8 +3,6 @@ package fr.utbm.airsim.api
 import fr.utbm.airsim.api.annotations.SerialName
 import fr.utbm.airsim.api.common.ImageType
 import org.msgpack.annotation.Message
-import java.awt.ComponentOrientation
-import java.util.*
 
 @Message
 data class KinematicsState(

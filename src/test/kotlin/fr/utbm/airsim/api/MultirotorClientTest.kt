@@ -2,14 +2,10 @@ package fr.utbm.airsim.api
 
 import org.msgpack.rpc.Client
 import org.msgpack.rpc.loop.EventLoop
-import java.lang.Math.cos
-import java.lang.Math.sin
-import java.lang.Thread.sleep
 
 /**
  * Test class for Multirotor client
  */
-@kotlin.ExperimentalUnsignedTypes
 class MultirotorClientTest {
     companion object {
         @JvmStatic

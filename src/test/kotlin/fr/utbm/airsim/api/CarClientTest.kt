@@ -1,14 +1,11 @@
 package fr.utbm.airsim.api
 
-import org.msgpack.MessagePack
 import org.msgpack.rpc.Client
 import org.msgpack.rpc.loop.EventLoop
-import java.lang.Thread.sleep
 
 /**
  * Test class for the car client
  */
-@kotlin.ExperimentalUnsignedTypes
 class CarClientTest {
 
     companion object {

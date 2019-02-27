@@ -1,15 +1,12 @@
 package fr.utbm.airsim.api
 
-import com.sun.xml.internal.fastinfoset.util.StringArray
 import fr.utbm.airsim.api.common.ImageType
 import org.msgpack.annotation.Message
-import java.awt.ComponentOrientation
 
 /**
  * Base interface of the AirSim clients (for both car and drone)
  * @author Alexandre Lombard
  */
-@kotlin.ExperimentalUnsignedTypes
 interface RpcLibClientBase {
     fun confirmConnection()
     fun reset()

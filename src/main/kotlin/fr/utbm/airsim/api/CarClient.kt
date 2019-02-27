@@ -4,7 +4,6 @@ package fr.utbm.airsim.api
  * This interface allows to control the AirSim car.
  * @author Alexandre Lombard
  */
-@kotlin.ExperimentalUnsignedTypes
 interface CarClientInterface : RpcLibClientBase {
     /**
      * Applies the given car controls

@@ -7,7 +7,6 @@ import java.lang.Thread.sleep
 /**
  * Test class for multiple multirotors client
  */
-@kotlin.ExperimentalUnsignedTypes
 class MultipleMultirotorClientTest {
     companion object {
         @JvmStatic
