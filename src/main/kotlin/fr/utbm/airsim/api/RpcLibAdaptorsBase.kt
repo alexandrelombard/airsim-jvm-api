@@ -3,6 +3,8 @@ package fr.utbm.airsim.api
 import fr.utbm.airsim.api.annotations.SerialName
 import fr.utbm.airsim.api.common.ImageType
 import org.msgpack.annotation.Message
+import kotlin.math.asin
+import kotlin.math.atan2
 
 @Message
 data class KinematicsState(
@@ -38,7 +40,15 @@ data class Quaternionr(
         var y: Float = 0f,
         @SerialName("z_val")
         var z: Float = 0f
-) : AirSimRpcMessageTrait
+) : AirSimRpcMessageTrait {
+    fun toEuleurAngles() : Vector3r {
+        return Vector3r(
+                atan2(2 * y * w - 2 * x * z, 1 - 2 * y * y - 2 * z * z),
+                asin(2 * x *  y + 2 * z * w),
+                atan2(2 * x * w - 2 * y * z, 1 - 2 * x * x - 2 * z * z)
+        )
+    }
+}
 
 @Message
 data class EnvironmentState(

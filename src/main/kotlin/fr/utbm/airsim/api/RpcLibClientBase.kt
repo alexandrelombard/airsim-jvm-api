@@ -38,6 +38,10 @@ interface RpcLibClientBase {
     fun isApiControlEnabled(vehicleName: String = ""): Boolean
     fun enableApiControl(isEnabled: Boolean, vehicleName: String = "")
 
+    fun simSetSegmentationObjectID(meshName: String, objectId: String, isNameRegex: Boolean = true)
+    fun simGetSegmentationObjectID(meshName: String)
+    fun simPrintLogMessage(message: String, messageParam: String, severity: Int = 0)
+
     fun getHomeGeoPoint(vehicleName: String = ""): GeoPoint
 
     fun getLidarData(lidarName: String = "", vehicleName: String = ""): LidarData

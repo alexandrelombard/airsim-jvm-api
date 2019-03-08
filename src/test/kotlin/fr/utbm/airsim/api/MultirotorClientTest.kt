@@ -28,6 +28,9 @@ class MultirotorClientTest {
                 println("QuadCopter should now be flying")
             }
 
+            val newState = multirotorClient.getMultirotorState()
+            println(newState)
+
 //            multirotorClient.simPause(true)
 //            sleep(1000)
 //            multirotorClient.simContinueForTime(1.0)
