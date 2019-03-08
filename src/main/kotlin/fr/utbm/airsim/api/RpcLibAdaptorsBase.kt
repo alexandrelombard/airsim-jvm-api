@@ -31,6 +31,8 @@ data class Vector3r(
 ) : AirSimRpcMessageTrait {
     operator fun plus(v: Vector3r) = Vector3r(x + v.x, y - v.y, z + v.z)
     operator fun minus(v: Vector3r) = Vector3r(x - v.x, y - v.y, z - v.z)
+    fun cross(v: Vector3r) = Vector3r(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x)
+    fun dot(v: Vector3r) = x * v.x + y * v.y + z * v.z
 }
 
 @Message
