@@ -5,6 +5,7 @@ import fr.utbm.airsim.api.common.ImageType
 import org.msgpack.annotation.Message
 import kotlin.math.asin
 import kotlin.math.atan2
+import kotlin.math.sqrt
 
 @Message
 data class KinematicsState(
@@ -33,6 +34,8 @@ data class Vector3r(
     operator fun minus(v: Vector3r) = Vector3r(x - v.x, y - v.y, z - v.z)
     fun cross(v: Vector3r) = Vector3r(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x)
     fun dot(v: Vector3r) = x * v.x + y * v.y + z * v.z
+    fun squaredLength() = x * x + y * y + z * z
+    fun length() = sqrt(squaredLength())
 }
 
 @Message
