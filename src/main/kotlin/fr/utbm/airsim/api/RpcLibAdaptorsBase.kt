@@ -28,7 +28,10 @@ data class Vector3r(
         var y: Float = 0f,
         @SerialName("z_val")
         var z: Float = 0f
-) : AirSimRpcMessageTrait
+) : AirSimRpcMessageTrait {
+    operator fun plus(v: Vector3r) = Vector3r(x + v.x, y - v.y, z + v.z)
+    operator fun minus(v: Vector3r) = Vector3r(x - v.x, y - v.y, z - v.z)
+}
 
 @Message
 data class Quaternionr(
@@ -41,6 +44,9 @@ data class Quaternionr(
         @SerialName("z_val")
         var z: Float = 0f
 ) : AirSimRpcMessageTrait {
+    /**
+     * Converts this quaternion to its euler angles representation
+     */
     fun toEuleurAngles() : Vector3r {
         return Vector3r(
                 atan2(2 * y * w - 2 * x * z, 1 - 2 * y * y - 2 * z * z),
