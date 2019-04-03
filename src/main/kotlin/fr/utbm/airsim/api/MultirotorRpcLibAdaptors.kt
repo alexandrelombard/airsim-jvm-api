@@ -33,7 +33,8 @@ data class MultirotorState(
 
 @MessagePackOrdinalEnum
 enum class LandedState {
-    LANDED
+    LANDED,
+    FLYING
 }
 
 @MessagePackOrdinalEnum
